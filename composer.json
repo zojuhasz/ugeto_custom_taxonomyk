@@ -1,0 +1,16 @@
+{
+    "name": "zojuhasz/ugeto_custom_taxonomyk",
+    "type": "drupal-module",
+    "description": "Taxonomyk generalasa cikkekhez hirekhez",
+    "keywords": [
+          "Drupal"
+    ],
+    "homepage": "https://github.com/zojuhasz/ugeto_custom_taxonomyk",
+    "license": "GPL-2.0-or-later",
+    "require": {
+           "composer/installers": "^2.0"
+    },
+    "extra": {
+    "installer-name": "custom_taxonomyk"
+    }
+}

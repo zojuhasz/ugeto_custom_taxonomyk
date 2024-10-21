@@ -1,0 +1,76 @@
+<?php
+
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_installl().
+ */
+function custom_taxonomyk_install() {
+  // Ellen?rizzük, hogy a taxonómia már létezik-e.
+  if (!Vocabulary::load('hirek')) {
+    // Létrehozunk egy új taxonómiai szókincset.
+    $vocabulary = Vocabulary::create([
+      'vid' => 'hirek',
+      'description' => 'hírek kategóriái',
+      'name' => 'hírek',
+      'langcode' => 'hu', // Beállítjuk a nyelvet
+    ]);
+    $vocabulary->save();
+
+    // Alapértelmezett kifejezések hozzáadása.
+    $terms = ['Egyéb hírek', 'Lovaregylet hírei', 'Szolgáltatások', 'Tenyésztés', 'Versenyzés'];
+    foreach ($terms as $term_name) {
+      Term::create([
+        'name' => $term_name,
+        'vid' => 'hirek',
+        'langcode' => 'hu', // Beállítjuk a nyelvet
+      ])->save();
+    }
+  }
+  
+  // Ellen?rizzük, hogy a taxonómia már létezik-e.
+  if (!Vocabulary::load('publikaciok')) {
+    // Létrehozunk egy új taxonómiai szókincset.
+    $vocabulary = Vocabulary::create([
+      'vid' => 'publikaciok',
+      'description' => 'publikációk kategóriái',
+      'name' => 'publikációk',
+      'langcode' => 'hu', // Beállítjuk a nyelvet
+    ]);
+    $vocabulary->save();
+
+    // Alapértelmezett kifejezések hozzáadása.
+    $terms = ['egyéb publikációk', 'idézetek', 'Lovaregylet publikációi', 'saját publikációk', 'tudományos linkek'];
+    foreach ($terms as $term_name) {
+      Term::create([
+        'name' => $term_name,
+        'vid' => 'publikaciok',
+      ])->save();
+    }
+  }
+
+
+
+
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function custom_taxonomyk_uninstall() {
+  // Töröljük a taxonómiát és a hozzá tartozó kifejezéseket.
+  $vocabulary = Vocabulary::load('hirek');
+  if ($vocabulary) {
+    $vocabulary->delete();
+  }
+  // Töröljük a taxonómiát és a hozzá tartozó kifejezéseket.
+  $vocabulary = Vocabulary::load('publikaciok');
+  if ($vocabulary) {
+    $vocabulary->delete();
+  }
+}
+
+
+

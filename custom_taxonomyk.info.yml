@@ -1,0 +1,7 @@
+name: Custom Taxonomyk
+type: module
+description: 'Creates custom taxonomies and terms on install.'
+core_version_requirement: ^11
+package: Custom
+dependencies:
+  - taxonomy
